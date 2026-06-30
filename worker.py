@@ -155,6 +155,8 @@ def worker_loop():
 if __name__ == '__main__':
     init_redis()
     if len(sys.argv) > 1 and sys.argv[1] == 'webhook':
-        app.run(host='0.0.0.0', port=5000)
+        # Railway asigna el puerto a través de la variable de entorno PORT
+        port = int(os.environ.get('PORT', 5000))
+        app.run(host='0.0.0.0', port=port)
     else:
         worker_loop()
